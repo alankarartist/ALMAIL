@@ -162,4 +162,4 @@ class AlMail:
         root.mainloop()
 
 if __name__=='__main__':
-    AlMail('outlook') #'outlook' or 'gmail'
+    AlMail('gmail') #'outlook' or 'gmail'
