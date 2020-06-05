@@ -4,7 +4,9 @@ A python script based GUI interface to send email on GMail, Outlook, HotMail and
 
 ## Usage
 
-![](/TestGmail.JPG)         ![](/TestOutlook.JPG)
+![](/TestGmail.JPG)
+
+![](/TestOutlook.JPG)
 
 1. Username - Your username like abc@gmail.com or abc@outlook.com.
 2. TO - Recipients ID like - abc@gmail.com,abc@outlook.com.
