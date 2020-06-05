@@ -19,7 +19,7 @@ class AlMail:
             color='#e22b2d' 
         elif mailType=='outlook' or mailType=='hotmail' or mailType=='live':
             root= Tk(className=" AlMicrosoft " )
-            root.geometry("400x600+1510+415")
+            root.geometry("500x700+1410+315")
             root.config(bg="#035aaa")
             debuglevel = True
             server=smtplib.SMTP('smtp.office365.com','587')
@@ -162,4 +162,4 @@ class AlMail:
         root.mainloop()
 
 if __name__=='__main__':
-    AlMail(input) #'outlook' or 'gmail'
+    AlMail('outlook') #'outlook' or 'gmail'
