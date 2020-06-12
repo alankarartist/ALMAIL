@@ -95,38 +95,39 @@ class AlMail:
             finally:
                 server.quit()
         appHighlightFont = font.Font(family='sans-serif', size=12, weight='bold')
+        textHighlightFont = font.Font(family='LEMON MILK', size=10)
         #user mail
         userEmail = Label(root, text="Username")
         userEmail.pack()
-        userEmail.config(bg=color,fg="white",font=appHighlightFont)
+        userEmail.config(bg=color,fg="white",font=textHighlightFont)
         userEmail = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         userEmail.pack(fill=X)
 
         #to email
         toEmail = Label(root, text="TO")
         toEmail.pack( )
-        toEmail.config(bg=color,fg="white",font=appHighlightFont)
+        toEmail.config(bg=color,fg="white",font=textHighlightFont)
         toEmail = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         toEmail.pack(fill=X)
 
         #cc email
         ccEmail = Label(root, text="CC")
         ccEmail.pack( )
-        ccEmail.config(bg=color,fg="white",font=appHighlightFont)
+        ccEmail.config(bg=color,fg="white",font=textHighlightFont)
         ccEmail = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         ccEmail.pack(fill=X)
 
         #bcc email
         bccEmail = Label(root, text="BCC")
         bccEmail.pack( )
-        bccEmail.config(bg=color,fg="white",font=appHighlightFont)
+        bccEmail.config(bg=color,fg="white",font=textHighlightFont)
         bccEmail = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         bccEmail.pack(fill=X)
 
         #subject line
         subj= Label(root, text="Subject")
         subj.pack( )
-        subj.config(bg=color,fg="white",font=appHighlightFont)
+        subj.config(bg=color,fg="white",font=textHighlightFont)
         subj = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         subj.pack(fill=X)
 
@@ -138,20 +139,20 @@ class AlMail:
         #Attachments to send
         fileName = Label(root, text="Attachment")
         fileName.pack( )
-        fileName.config(bg=color,fg="white",font=appHighlightFont)
+        fileName.config(bg=color,fg="white",font=textHighlightFont)
         fileName = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         fileName.pack(fill=X)
 
         #passWord widget
         passWord = Label(root, text="Password")
         passWord.pack()
-        passWord.config(bg=color,fg="white",font=appHighlightFont)
+        passWord.config(bg=color,fg="white",font=textHighlightFont)
         passWord= Entry(root, show='*', highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         passWord.pack(fill=X)
 
         #submit button
         submitMail = Button(root, text="Send Mail",  command=sendemail)
-        submitMail.config(bg=color,fg="white",font=appHighlightFont)
+        submitMail.config(bg=color,fg="white",font=textHighlightFont)
         submitMail.pack(fill=X)
 
         #feed back
@@ -162,4 +163,4 @@ class AlMail:
         root.mainloop()
 
 if __name__=='__main__':
-    AlMail(inputMail) #'outlook' or 'gmail'
+    AlMail('gmail') #'outlook' or 'gmail'
