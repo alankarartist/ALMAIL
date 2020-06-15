@@ -151,7 +151,7 @@ class AlMail:
         passWord.pack(fill=X)
 
         #submit button
-        submitMail = Button(root, text="Send Mail",  command=sendemail)
+        submitMail = Button(root, borderwidth=0, text="Send Mail", highlightthickness=5, command=sendemail)
         submitMail.config(bg=color,fg="white",font=textHighlightFont)
         submitMail.pack(fill=X)
 
@@ -163,4 +163,4 @@ class AlMail:
         root.mainloop()
 
 if __name__=='__main__':
-    AlMail(inputMail) #'outlook' or 'gmail'
+    AlMail(input) #'outlook' or 'gmail'
