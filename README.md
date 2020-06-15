@@ -15,3 +15,4 @@ A python script based GUI interface to send email on GMail, Outlook, HotMail and
 4. Enter message in the black box between Subject and Attachent.
 5. Attachment - You can also attach multiple documents, images and videos. You have to give input like - 1.docx,2.jpg,3.MP4.
 6. To send any attachment you have to keep it in /AlMail/Attachments folder.
+7. Click on SEND MAIL.
