@@ -8,6 +8,7 @@ import os.path
 import os
 from tkinter import*
 from tkinter import font
+import pyttsx3
 
 class AlMail:
     def __init__(self,mailType):
@@ -15,16 +16,20 @@ class AlMail:
             root= Tk(className=" AlGMail " )
             root.geometry("500x700+1410+315")
             root.config(bg="#e22b2d")
-            server=smtplib.SMTP('smtp.gmail.com','587')
             color='#e22b2d' 
         elif mailType=='outlook' or mailType=='hotmail' or mailType=='live':
             root= Tk(className=" AlMicrosoft " )
             root.geometry("500x700+1410+315")
             root.config(bg="#035aaa")
-            debuglevel = True
-            server=smtplib.SMTP('smtp.office365.com','587')
-            server.set_debuglevel(debuglevel)
-            color='#035aaa'       
+            color='#035aaa'      
+
+        def speak(audio):
+            engine = pyttsx3.init('sapi5')
+            voices = engine.getProperty('voices')
+            engine.setProperty('voice', voices[0].id)
+            engine.say(audio)
+            engine.runAndWait()
+
         def sendemail():         
             usermail = userEmail.get()
             tomail = toEmail.get()  
@@ -84,14 +89,23 @@ class AlMail:
                         part.add_header('Content-Disposition', "attachment; filename= %s" % attachname)
                         msg.attach(part)
             try:
+                text.delete(1.0, END)
+                if mailType=='gmail':
+                    server=smtplib.SMTP('smtp.gmail.com','587')
+                elif mailType=='outlook' or mailType=='hotmail' or mailType=='live':
+                    debuglevel = True
+                    server=smtplib.SMTP('smtp.office365.com','587')
+                    server.set_debuglevel(debuglevel)
                 server.ehlo()
                 server.starttls()
                 server.login(usermail, password)
                 textmsg = msg.as_string()
                 server.sendmail(usermail, (to+cc+bcc), textmsg)
-                text.insert(1.0, 'Message sent. ')
+                text.insert(1.0, 'Mail sent. ')
+                speak('Mail sent. ')
             except(smtplib.SMTPException,ConnectionRefusedError,OSError):
-                text.insert(1.0, 'Message not sent. ')
+                text.insert(1.0, 'Mail not sent. ')
+                speak('Mail not sent. ')
             finally:
                 server.quit()
         appHighlightFont = font.Font(family='sans-serif', size=12, weight='bold')
@@ -163,4 +177,5 @@ class AlMail:
         root.mainloop()
 
 if __name__=='__main__':
-    AlMail(input) #'outlook' or 'gmail'
+    mail = input('>> ') #'outlook' or 'gmail'
+    AlMail(mail) 
