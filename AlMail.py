@@ -9,6 +9,9 @@ import os
 from tkinter import*
 from tkinter import font
 import pyttsx3
+import sys
+
+cwd = os.path.dirname(os.path.realpath(__file__))
 
 class AlMail:
     def __init__(self,mailType):
@@ -69,7 +72,7 @@ class AlMail:
             msg.attach(MIMEText(mainMessage, 'plain'))
             if filename:
                 if ',' not in filename:
-                    filepath = os.path.abspath(os.getcwd())+'\\AlMail\\Attachments\\'+filename
+                    filepath = os.path.join(os.path.abspath(cwd)+'\AlMail\Attachments',filename)
                     attachname = os.path.basename(filepath)
                     attachment = open(filepath, "rb")
                     part = MIMEBase('application', 'octet-stream')
@@ -80,7 +83,7 @@ class AlMail:
                 if ',' in filename:
                     filename = filename.split(',')
                     for f in filename:
-                        filepath = os.path.abspath(os.getcwd())+'\\AlMail\\Attachments\\'+f
+                        filepath = os.path.join(os.path.abspath(cwd)+'\AlMail\Attachments',f)
                         attachname = os.path.basename(filepath)
                         attachment = open(filepath, "rb")
                         part = MIMEBase('application', 'octet-stream')
@@ -109,9 +112,10 @@ class AlMail:
             finally:
                 server.quit()
         appHighlightFont = font.Font(family='sans-serif', size=12, weight='bold')
-        textHighlightFont = font.Font(family='LEMON MILK', size=10)
+        textHighlightFont = font.Font(family='Segoe UI', size=12)
+
         #user mail
-        userEmail = Label(root, text="Username")
+        userEmail = Label(root, text="USERNAME")
         userEmail.pack()
         userEmail.config(bg=color,fg="white",font=textHighlightFont)
         userEmail = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
@@ -139,7 +143,7 @@ class AlMail:
         bccEmail.pack(fill=X)
 
         #subject line
-        subj= Label(root, text="Subject")
+        subj= Label(root, text="SUBJECT")
         subj.pack( )
         subj.config(bg=color,fg="white",font=textHighlightFont)
         subj = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
@@ -151,21 +155,21 @@ class AlMail:
         body.pack(fill=BOTH, expand=True)
 
         #Attachments to send
-        fileName = Label(root, text="Attachment")
+        fileName = Label(root, text="ATTACHMENT")
         fileName.pack( )
         fileName.config(bg=color,fg="white",font=textHighlightFont)
         fileName = Entry(root, highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         fileName.pack(fill=X)
 
         #passWord widget
-        passWord = Label(root, text="Password")
+        passWord = Label(root, text="PASSWORD")
         passWord.pack()
         passWord.config(bg=color,fg="white",font=textHighlightFont)
         passWord= Entry(root, show='*', highlightbackground=color, highlightcolor=color, highlightthickness=3, bd=0,font=appHighlightFont)
         passWord.pack(fill=X)
 
         #submit button
-        submitMail = Button(root, borderwidth=0, text="Send Mail", highlightthickness=5, command=sendemail)
+        submitMail = Button(root, borderwidth=0, highlightthickness=5, text="SEND MAIL", command=sendemail)
         submitMail.config(bg=color,fg="white",font=textHighlightFont)
         submitMail.pack(fill=X)
 
@@ -177,5 +181,4 @@ class AlMail:
         root.mainloop()
 
 if __name__=='__main__':
-    mail = input('>> ') #'outlook' or 'gmail'
-    AlMail(mail) 
+    AlMail(sys.argv[1]) 
