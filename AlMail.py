@@ -16,12 +16,12 @@ cwd = os.path.dirname(os.path.realpath(__file__))
 class AlMail:
     def __init__(self,mailType):
         if mailType.lower()=='gmail':
-            root= Tk(className=" AlGMail " )
+            root= Tk(className=" ALGMAIL " )
             root.geometry("500x700+1410+315")
             root.config(bg="#e22b2d")
             color='#e22b2d' 
         elif mailType.lower()=='outlook' or mailType.lower()=='hotmail' or mailType.lower()=='live':
-            root= Tk(className=" AlMicrosoft " )
+            root= Tk(className=" ALMICROSOFT " )
             root.geometry("500x700+1410+315")
             root.config(bg="#035aaa")
             color='#035aaa'      
