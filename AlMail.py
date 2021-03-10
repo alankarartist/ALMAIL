@@ -15,12 +15,12 @@ cwd = os.path.dirname(os.path.realpath(__file__))
 
 class AlMail:
     def __init__(self,mailType):
-        if mailType=='gmail':
+        if mailType.lower()=='gmail':
             root= Tk(className=" AlGMail " )
             root.geometry("500x700+1410+315")
             root.config(bg="#e22b2d")
             color='#e22b2d' 
-        elif mailType=='outlook' or mailType=='hotmail' or mailType=='live':
+        elif mailType.lower()=='outlook' or mailType.lower()=='hotmail' or mailType.lower()=='live':
             root= Tk(className=" AlMicrosoft " )
             root.geometry("500x700+1410+315")
             root.config(bg="#035aaa")
@@ -93,9 +93,9 @@ class AlMail:
                         msg.attach(part)
             try:
                 text.delete(1.0, END)
-                if mailType=='gmail':
+                if mailType.lower()=='gmail':
                     server=smtplib.SMTP('smtp.gmail.com','587')
-                elif mailType=='outlook' or mailType=='hotmail' or mailType=='live':
+                elif mailType.lower()=='outlook' or mailType.lower()=='hotmail' or mailType.lower()=='live':
                     debuglevel = True
                     server=smtplib.SMTP('smtp.office365.com','587')
                     server.set_debuglevel(debuglevel)
