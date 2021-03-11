@@ -25,7 +25,8 @@ class AlMail:
             root.geometry("500x700+1410+315")
             root.config(bg="#035aaa")
             color='#035aaa'      
-
+        root.iconbitmap(os.path.join(cwd+'\\UI\\icons', 'almail.ico'))
+        
         def speak(audio):
             engine = pyttsx3.init('sapi5')
             voices = engine.getProperty('voices')
