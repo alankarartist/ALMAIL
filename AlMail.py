@@ -9,6 +9,7 @@ import os
 from tkinter import*
 from tkinter import font
 import pyttsx3
+from PIL import ImageTk, Image
 import sys
 
 cwd = os.path.dirname(os.path.realpath(__file__))
@@ -17,17 +18,32 @@ class AlMail:
     def __init__(self,mailType):
         if mailType.lower()=='gmail':
             root= Tk(className=" ALGMAIL " )
-            root.geometry("500x700+1410+315")
+            root.geometry("500x750+1410+300")
             root.config(bg="#e22b2d")
             color='#e22b2d' 
         elif mailType.lower()=='outlook' or mailType.lower()=='hotmail' or mailType.lower()=='live':
             root= Tk(className=" ALMICROSOFT " )
-            root.geometry("500x700+1410+315")
+            root.geometry("500x750+1410+300")
             root.config(bg="#035aaa")
             color='#035aaa'      
         root.resizable(0,0)
+        root.overrideredirect(1)
         root.iconbitmap(os.path.join(cwd+'\\UI\\icons', 'almail.ico'))
         
+        def callback(event):
+            root.geometry("500x750+1410+300")
+
+        def showScreen(event):
+            root.deiconify()
+            root.overrideredirect(1)
+
+        def screenAppear(event):
+            root.overrideredirect(1)
+
+        def hideScreen():
+            root.overrideredirect(0)
+            root.iconify()
+
         def speak(audio):
             engine = pyttsx3.init('sapi5')
             voices = engine.getProperty('voices')
@@ -113,8 +129,33 @@ class AlMail:
                 speak('Mail not sent. ')
             finally:
                 server.quit()
-        appHighlightFont = font.Font(family='sans-serif', size=12, weight='bold')
-        textHighlightFont = font.Font(family='Segoe UI', size=12)
+        
+        textHighlightFont = font.Font(family='OnePlus Sans Display', size=12)
+        appHighlightFont = font.Font(family='OnePlus Sans Display', size=12, weight='bold')
+
+        #title bar
+        titleBar = Frame(root, bg='#141414', relief=SUNKEN, bd=0)
+        icon = Image.open(os.path.join(cwd+'\\UI\\icons', 'almail.ico'))
+        icon = icon.resize((30,30), Image.ANTIALIAS)
+        icon = ImageTk.PhotoImage(icon)
+        iconLabel = Label(titleBar, image=icon)
+        iconLabel.photo = icon
+        iconLabel.config(bg='#141414')
+        iconLabel.grid(row=0,column=0,sticky="nsew")
+        if mailType.lower()=='gmail':
+            titleLabel = Label(titleBar, text='ALGMAIL', fg='#909090', bg='#141414', font=appHighlightFont)
+        elif mailType.lower()=='outlook' or mailType.lower()=='hotmail' or mailType.lower()=='live':
+            titleLabel = Label(titleBar, text='ALMICROSOFT', fg='#909090', bg='#141414', font=appHighlightFont)
+        titleLabel.grid(row=0,column=1,sticky="nsew")
+        closeButton = Button(titleBar, text="x", bg='#141414', fg="#909090", borderwidth=0, command=root.destroy, font=appHighlightFont)
+        closeButton.grid(row=0,column=3,sticky="nsew")
+        minimizeButton = Button(titleBar, text="-", bg='#141414', fg="#909090", borderwidth=0, command=hideScreen, font=appHighlightFont)
+        minimizeButton.grid(row=0,column=2,sticky="nsew")
+        titleBar.grid_columnconfigure(0,weight=1)
+        titleBar.grid_columnconfigure(1,weight=75)
+        titleBar.grid_columnconfigure(2,weight=1)
+        titleBar.grid_columnconfigure(3,weight=1)
+        titleBar.pack(fill=X)
 
         #user mail
         userEmail = Label(root, text="USERNAME")
@@ -179,6 +220,10 @@ class AlMail:
         text = Text(root, font="sans-serif",  relief=SUNKEN , highlightbackground=color, highlightcolor=color, highlightthickness=5, bd=0)
         text.config(bg="black", fg='white', height=2, font=appHighlightFont)
         text.pack(fill=BOTH, expand=True)
+
+        titleBar.bind("<B1-Motion>", callback)
+        titleBar.bind("<Button-3>", showScreen)
+        titleBar.bind("<Map>", screenAppear)
 
         root.mainloop()
 
