@@ -7,11 +7,8 @@ A python script based GUI interface to send email on GMail, Outlook, HotMail and
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install packages.
 
 ```bash
-pip install pyttsx3
-pip install PyAudio
 pip install Pillow
 ```
-1. If there is problem in installing PyAudio, then go to the [link](https://www.lfd.uci.edu/~gohlke/pythonlibs/) and download the package file according to the system requirements and then try to install it.
 
 ## Usage
 
@@ -27,3 +24,9 @@ pip install Pillow
 6. Attachment - You can also attach multiple documents, images and videos. You have to give input like - 1.docx,2.jpg,3.MP4.
 7. To send any attachment you have to keep it in /AlMail/Attachments folder.
 8. Click on SEND MAIL.
+
+## Contributor
+
+<a href="https://github.com/alankarartist/ALMAIL/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=alankarartist/ALMAIL" />
+</a>
