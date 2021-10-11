@@ -8,7 +8,6 @@ import os.path
 import os
 from tkinter import*
 from tkinter import font
-import pyttsx3
 from PIL import ImageTk, Image
 import sys
 
@@ -43,13 +42,6 @@ class AlMail:
         def hideScreen():
             root.overrideredirect(0)
             root.iconify()
-
-        def speak(audio):
-            engine = pyttsx3.init('sapi5')
-            voices = engine.getProperty('voices')
-            engine.setProperty('voice', voices[0].id)
-            engine.say(audio)
-            engine.runAndWait()
 
         def sendemail():         
             usermail = userEmail.get()
@@ -123,10 +115,8 @@ class AlMail:
                 textmsg = msg.as_string()
                 server.sendmail(usermail, (to+cc+bcc), textmsg)
                 text.insert(1.0, 'Mail sent. ')
-                speak('Mail sent. ')
             except(smtplib.SMTPException,ConnectionRefusedError,OSError):
                 text.insert(1.0, 'Mail not sent. ')
-                speak('Mail not sent. ')
             finally:
                 server.quit()
         
