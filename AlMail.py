@@ -9,8 +9,10 @@ from tkinter import Tk, Label, END, X, Button, BOTH
 from tkinter import font, Frame, SUNKEN, Entry, Text
 from PIL import ImageTk, Image
 import sys
+import platform
 
 cwd = os.path.dirname(os.path.realpath(__file__))
+systemName = platform.system()
 
 
 class AlMail:
@@ -28,7 +30,11 @@ class AlMail:
             color = '#035aaa'
         root.resizable(0, 0)
         root.overrideredirect(1)
-        root.iconbitmap(os.path.join(cwd+'\\UI\\icons', 'almail.ico'))
+        iconPath = os.path.join(cwd+'\\UI\\icons',
+                                'almail.ico')
+        if systemName == 'Darwin':
+            iconPath = iconPath.replace('\\','/')
+        root.iconbitmap(iconPath)
 
         def liftWindow():
             root.lift()
@@ -90,6 +96,8 @@ class AlMail:
                     filepath = os.path.join(os.path.abspath(cwd)+'\\AlMail\\A'
                                                                  'ttachments',
                                                                  filename)
+                    if systemName == 'Darwin':
+                        filepath = filepath.replace('\\','/')
                     attachname = os.path.basename(filepath)
                     attachment = open(filepath, "rb")
                     part = MIMEBase('application', 'octet-stream')
@@ -105,6 +113,8 @@ class AlMail:
                                                                      '\\Attach'
                                                                      'ments',
                                                                      f)
+                        if systemName == 'Darwin':
+                            filepath = filepath.replace('\\','/')
                         attachname = os.path.basename(filepath)
                         attachment = open(filepath, "rb")
                         part = MIMEBase('application', 'octet-stream')
@@ -140,7 +150,7 @@ class AlMail:
                                      weight='bold')
 
         titleBar = Frame(root, bg='#141414', relief=SUNKEN, bd=0)
-        icon = Image.open(os.path.join(cwd+'\\UI\\icons', 'almail.ico'))
+        icon = Image.open(iconPath)
         icon = icon.resize((30, 30), Image.ANTIALIAS)
         icon = ImageTk.PhotoImage(icon)
         iconLabel = Label(titleBar, image=icon)
