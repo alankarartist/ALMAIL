@@ -9,10 +9,8 @@ from tkinter import Tk, Label, END, X, Button, BOTH
 from tkinter import font, Frame, SUNKEN, Entry, Text
 from PIL import ImageTk, Image
 import sys
-import platform
 
 cwd = os.path.dirname(os.path.realpath(__file__))
-systemName = platform.system()
 
 
 class AlMail:
@@ -32,8 +30,6 @@ class AlMail:
         root.overrideredirect(1)
         iconPath = os.path.join(cwd+'\\UI\\icons',
                                 'almail.ico')
-        if systemName == 'Darwin':
-            iconPath = iconPath.replace('\\','/')
         root.iconbitmap(iconPath)
 
         def liftWindow():
@@ -96,8 +92,6 @@ class AlMail:
                     filepath = os.path.join(os.path.abspath(cwd)+'\\AlMail\\A'
                                                                  'ttachments',
                                                                  filename)
-                    if systemName == 'Darwin':
-                        filepath = filepath.replace('\\','/')
                     attachname = os.path.basename(filepath)
                     attachment = open(filepath, "rb")
                     part = MIMEBase('application', 'octet-stream')
@@ -113,8 +107,6 @@ class AlMail:
                                                                      '\\Attach'
                                                                      'ments',
                                                                      f)
-                        if systemName == 'Darwin':
-                            filepath = filepath.replace('\\','/')
                         attachname = os.path.basename(filepath)
                         attachment = open(filepath, "rb")
                         part = MIMEBase('application', 'octet-stream')
@@ -251,8 +243,7 @@ class AlMail:
         titleBar.bind("<Button-3>", showScreen)
         titleBar.bind("<Map>", screenAppear)
 
-        if systemName == 'Windows':
-            liftWindow()
+        liftWindow()
         root.mainloop()
 
 
